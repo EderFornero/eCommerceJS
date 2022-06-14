@@ -41,3 +41,24 @@ if(intentos === 3){
 }else(
     alert("Cuenta registrada")
 );
+
+
+//ESTRUCTURA CON WHILE Y SWITCH ME DA ERROR AL EJECUTARLA 
+
+// let palabraClave = prompt("Ingresa la palabra clave") 
+
+// while(palabraClave != "javascript"){
+
+//         switch(palabraClave){ 
+//             case "css":
+//                 console.log("No estamos en CSS");
+//                 break;
+//             case "html":
+//                 alert("No estamos en HTML");
+//                 break; 
+//             default: 
+//             alert("Ingresaste")
+//             break; 
+//     }
+
+// }
