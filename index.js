@@ -4,46 +4,49 @@
 
 // ESTRUCTURA CON FOR 
 
-for (let i = 1; i <=10; i++){ 
-    if(i === 6){ 
-        break
-    }
-    console.log(i);
-}
+// for (let i = 1; i <=10; i++){ 
+//     if(i === 6){ 
+//         break
+//     }
+//     console.log(i);
+// }
 
-for (let i = 1; i <=10; i++){ 
-    if(i === 6){ 
-        continue
-    }
-    console.log(i);
-}
+// for (let i = 1; i <=10; i++){ 
+//     if(i === 6){ 
+//         continue
+//     }
+//     console.log(i);
+// }
+
+
+
 
 
 // ESTRUCTURA CON WHILE 
 
-let cuenta = parseInt(prompt("Ingrese su numero de cuenta"));
-let intentos = 0; 
+// let cuenta = parseInt(prompt("Ingrese su numero de cuenta"));
+// let intentos = 0; 
 
-while(cuenta != "02"){ 
-    alert("Cuenta no registrada"); 
+// while(cuenta != "02"){ 
+//     alert("Cuenta no registrada"); 
 
-    if(intentos === 3){ 
-      break; 
-    }
+//     if(intentos === 3){ 
+//       break; 
+//     }
 
-    intentos++
-    prompt("Ingrese su numero de cuenta")
-}
+//     intentos++
+//     prompt("Ingrese su numero de cuenta")
+// }
 
-if(intentos === 3){
-    alert("Vuelva a intentar en 5 minutos");
-    prompt("Ingrese su numero de cuenta"); 
-}else(
-    alert("Cuenta registrada")
-);
+// if(intentos === 3){
+//     alert("Vuelva a intentar en 5 minutos");
+//     prompt("Ingrese su numero de cuenta"); 
+// }else(
+//     alert("Cuenta registrada")
+// );
 
 
-//ESTRUCTURA CON WHILE Y SWITCH ME DA ERROR AL EJECUTARLA 
+//ESTRUCTURA CON WHILE Y SWITCH 
 
 // let palabraClave = prompt("Ingresa la palabra clave") 
 
@@ -57,8 +60,66 @@ if(intentos === 3){
 //                 alert("No estamos en HTML");
 //                 break; 
 //             default: 
-//             alert("Ingresaste")
+//             alert("Ingresaste");
 //             break; 
 //     }
 
 // }
+
+
+
+
+
+/* ESTRUCTURA DE UNA FUNCION 
+
+function nombreFuncion(){ };
+
+despues llamar la funcion =
+
+nombreFuncion("parentesis vacios es decir que se ejecuta");
+*/
+
+
+//FUNCION CON RETURN / NORMAL
+
+function suma (a, b){ 
+    let resultado = a + b;
+    return resultado; 
+}
+
+
+//FUNCION SIN RETURN = ARROW 
+
+const resta = (a,b) => a - b; 
+
+console.log(resta(4,2));
+
+
+
+//FUNCION A ENTREGAR 
+
+//DESCRIPCION = ES UNA FUNCION QUE CONSTA DE UNA COMPRA DE 2 PRODUCTOS CON UN DESCUENTO 
+
+const multiplicacion = (a , b) => a * b; 
+const cantidadProducto = (a , b) => a - b; 
+
+
+let precioProducto = 2000; 
+let descuento = 350; 
+let cantidadCompra = 2; 
+
+let total = cantidadProducto(multiplicacion(precioProducto,cantidadCompra),descuento);
+
+total = cantidadProducto((2000 * 2), 300); 
+
+/* 
+    let total = cantidadProducto(multiplicacion(2000 * 2),descuento);
+    let total = cantidadProducto(4000, descuento);
+    let total = cantidadProducto(4000, 350); 
+    let total = 4000 - 350; 
+    let total = 3650;  
+);
+
+*/ 
+
+
