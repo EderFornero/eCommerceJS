@@ -125,7 +125,7 @@ total = cantidadProducto((2000 * 2), 300);
 
 //LLEGAR AL RESULTADO FINAL DE UN VIDEOJUEGO CON IMPUESTO EN EL PAGO
 
-const oferta = (a , b) => a * b / c; 
+const oferta = (a , b, c) => a * b / c; 
 const impuesto = x => 1.65 * x ; 
 
 let videojuego = 1370;
