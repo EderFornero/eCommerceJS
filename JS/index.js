@@ -82,17 +82,17 @@ nombreFuncion("parentesis vacios es decir que se ejecuta");
 
 //FUNCION CON RETURN / NORMAL
 
-function suma (a, b){ 
-    let resultado = a + b;
-    return resultado; 
-}
+// function suma (a, b){ 
+//     let resultado = a + b;
+//     return resultado; 
+// }
 
 
-//FUNCION SIN RETURN = ARROW 
+// //FUNCION SIN RETURN = ARROW 
 
-const resta = (a,b) => a - b; 
+// const resta = (a,b) => a - b; 
 
-console.log(resta(4,2));
+// console.log(resta(4,2));
 
 
 
@@ -100,17 +100,17 @@ console.log(resta(4,2));
 
 //DESCRIPCION = ES UNA FUNCION QUE CONSTA DE UNA COMPRA DE 2 PRODUCTOS CON UN DESCUENTO 
 
-const multiplicacion = (a , b) => a * b; 
-const cantidadProducto = (a , b) => a - b; 
+// const multiplicacion = (a , b) => a * b; 
+// const cantidadProducto = (a , b) => a - b; 
 
 
-let precioProducto = 2000; 
-let descuento = 350; 
-let cantidadCompra = 2; 
+// let precioProducto = 2000; 
+// let descuento = 350; 
+// let cantidadCompra = 2; 
 
-let total = cantidadProducto(multiplicacion(precioProducto,cantidadCompra),descuento);
+// let total = cantidadProducto(multiplicacion(precioProducto,cantidadCompra),descuento);
 
-total = cantidadProducto((2000 * 2), 300); 
+// total = cantidadProducto((2000 * 2), 300); 
 
 /* 
     let total = cantidadProducto(multiplicacion(2000 * 2),descuento);
@@ -125,27 +125,122 @@ total = cantidadProducto((2000 * 2), 300);
 
 //LLEGAR AL RESULTADO FINAL DE UN VIDEOJUEGO CON IMPUESTO EN EL PAGO
 
-const oferta = (a , b, c) => a * b / c; 
-const impuesto = x => 1.65 * x ; 
+// const oferta = (a , b, c) => a * b / c; 
+// const impuesto = x => 1.65 * x ; 
 
-let videojuego = 1370;
-let ofertaPorcentaje = 30; 
-let valorC = 100; 
+// let videojuego = 1370;
+// let ofertaPorcentaje = 30; 
+// let valorC = 100; 
 
-let resultado = impuesto(oferta(videojuego, ofertaPorcentaje, valorC))
+// let resultado = impuesto(oferta(videojuego, ofertaPorcentaje, valorC))
     
-    resultado = impuesto (oferta(1370, ofertaPorcentaje, valorC));
-    resultado = impuesto (oferta(1370 * 30, valorC));
-    resultado = impuesto (oferta(1370 * 30 / 100));
-    resultado = impuesto (oferta(41.100 / 100));
-    resultado = impuesto (oferta (411)); 
-    resultado = 1.65 * 411; 
-    resultado = 678,15; 
+//     resultado = impuesto (oferta(1370, ofertaPorcentaje, valorC));
+//     resultado = impuesto (oferta(1370 * 30, valorC));
+//     resultado = impuesto (oferta(1370 * 30 / 100));
+//     resultado = impuesto (oferta(41.100 / 100));
+//     resultado = impuesto (oferta (411)); 
+//     resultado = 1.65 * 411; 
+//     resultado = 678,15; 
 
 
 
 
 
+
+
+
+
+
+
+
+// "SPLICE" SE USA PARA ELIMINAR PARAMETROS DESDE UNA POSICION SELECCIONADA HASTA OTRA POSICION SELECCIONADA
+
+const array3 = ["Juan", "Pepe", "Tomas", "Mariana", "Carlos", "Jose"]; 
+
+array3.splice(6); 
+console.log(array3);
+
+// TAMBIEN SE PUEDE UTILIZAR PARA CAMBIAR 
+
+{const array3 = ["Juan", "Pepe", "Tomas", "Mariana", "Carlos", "Jose"]; 
+
+array3.splice(4, 1, 'josesito'); 
+console.log(array3);}
+
+{
+const array3 = ["Juan", "Pepe", "Tomas", "Mariana", "Carlos", "Jose"]; 
+array3.splice(1, 3, 'josesito', 'pepito', 'jorgito');
+console.log(array3);}
+
+
+
+
+// "indexOF" busca la posicion del elemento pedido, si el mismo no existe retorna -1
+{
+const array3 = ["Juan", "Pepe", "Tomas", "Mariana", "Pensar", "Ejemplos", "Largos"];
+console.log(array3.indexOf("Largos")); }
+
+
+
+
+
+// "includes" para ver si esta o no dicho parametro
+
+{
+const array3 = ["Juan", "Pepe", "Tomas", "Mariana", "Pensar", "Ejemplos", "Largos"];
+console.log(array3.includes("Juana")); //false
+console.log(array3.includes("Juan")); //true
+}
+
+
+
+
+
+// "reverse" para modificar en reversa el array
+{
+const array3 = ["Maria", "Jose", "Pepe", "Jorge"]; 
+array3.reverse(); 
+console.log(array3);}
+
+
+
+
+//RECORRER UN ARRAY 
+
+const productos = [
+  {id: 1, nombre: "Gabinete"},
+  {id: 2, nombre: "GPU"}, 
+  {id: 3, nombre: "RAM"}, 
+]; 
+
+for (const producto of productos){
+console.log(producto.id)
+console.log(producto.nombre);}; 
+
+
+
+
+//OTRA FORMA ES CON FUNCION CONST
+
+class Animales { 
+    constructor(name, amount, value){ 
+      this.name = name; 
+      this.amount = amount; 
+      this.value = value; 
+    }
+  }
+  
+  const animales = []; 
+  
+  animales.push (new Animales ("Cat", 3, "2000"));
+  animales.push (new Animales ("Dog", 2, "3000"));
+  animales.push (new Animales ("Horse", 5, "6000"));
+  
+  console.table(animales);
+  
+  
+  
+  
 
 
 
