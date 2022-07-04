@@ -244,48 +244,23 @@ nombreFuncion("parentesis vacios es decir que se ejecuta");
 
 
   
-{
-const year = prompt("¿En qué año ganó Argentina su última copa américa?"); 
 
-if (year == 2021){ 
-   alert("¡Correcto!"); 
-}else{ alert("¡Eso no es verdad!")}
-}
+// let year = prompt("¿En qué año ganó Argentina su última copa américa?"); 
+
+// if (year == 2021){ 
+//    alert("¡Correcto!"); 
+// }else{ result = confirm ("¿Seguro?")}
+
+// if (result === true){ alert ("Eso no es verdad!")}
 
 
-{
-let vocales = prompt("Ingrese una vocal"); 
 
-while(vocales != "a", "e", "i", "o", "u"){ 
-  switch(volcales){ 
-    case "a".toLocaleLowerCase: 
-    alert("Ingresaste la vocal A");
-    break; 
 
-    case "e".toLocaleLowerCase: 
-    alert("Ingresaste la vocal E");
-    break; 
 
-    case "i".toLocaleLowerCase: 
-    alert("Ingresaste la vocal I");
-    break; 
 
-    case "o".toLocaleLowerCase: 
-    alert("Ingresaste la vocal O");
-    break; 
 
-    case "u".toLocaleLowerCase: 
-    alert("Ingresaste la vocal U");
-    break; 
 
-    default: alert("No es una vocal"); 
-    break;
-  }
-}
-
-}
-
-{
+//---------------------------------------------
 
 const resta = (a,b) => a - b; 
 console.log(resta(202,58));
@@ -298,20 +273,20 @@ console.log(multiplicacion(20, 15, 7));
 
 const division = (a, b) => a / b; 
 console.log(division(206, 21));
-}
 
 
-{
+
+//---------------------------------------------
+
 console.log(Math.max(50, 500, 12, 45));
 console.log(Math.min(50, 500, 12, 45));
 console.log(Math.PI);
-}
 
 
 
+//---------------------------------------------
 
 
-{
 let numero = "Ingrese un número"; 
 let repeticiones = 0; 
 let corte = 10; 
@@ -329,11 +304,19 @@ while (repeticiones <= numero && detener==false){
   }
 }
 
+y = 0;
+x = 0;
+while (y < 6) {
+  y ++;
+  x += y;
+
+  console.log(y)
 }
 
 
 
-{
+//---------------------------------------------
+
 
 const array1 = [
   {producto: "1" ,nombre: "CPU", marca: "Ryzen"},
@@ -345,10 +328,9 @@ for(const productos of array1){
   console.log(productos);
 }
 
-}
 
+//---------------------------------------------
 
-{
 
 class Stock{
   constructor(nombre, precio, cantidad){ 
@@ -366,4 +348,3 @@ array2.push (new Stock("GPU", "$80000", 3));
 
 console.log(array2);
 
-}
