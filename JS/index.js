@@ -25,7 +25,7 @@ stockProductos.forEach((producto) => {
     div.innerHTML = `
     <img class="img-producto" src =${producto.img} alt= ""> 
     <h3 class="nameProducto">${producto.name}</h3>
-    <p>${producto.brand}</p>
+    <p>Marca: ${producto.brand}</p>
     <p class="precioProducto">$${producto.price}</p>
     `
 
