@@ -48,6 +48,12 @@ body{
     font-family: fantasy; 
     
 }
+
+/*saludo*/
+.green{ 
+    background-color: rgb(99, 189, 99);
+}
+
 .div-form{ 
     display: flex;
     justify-content: center;
@@ -59,7 +65,9 @@ main{
  }
 
 .img-producto{ 
-    width: 100%;
+    width: 200px;
+    height: 150px;
+    
 }
 .producto{
     justify-content: space-around; 
