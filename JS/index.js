@@ -1,4 +1,9 @@
-
+//Search
+let search = document.getElementById("search"); 
+search.addEventListener("keydown", (e) => { 
+    e.preventDefault(); 
+    console.log(search);
+})
 
 //Formulario---------------------------------------------------------------------------------------
 

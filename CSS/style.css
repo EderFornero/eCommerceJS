@@ -48,7 +48,11 @@ body{
     font-family: fantasy; 
     
 }
-
+.searchBotton{ 
+    border: solid 0,5px;
+    background-color: #563d7c;
+    color: white;
+}
 /*saludo*/
 .green{ 
     background-color: rgb(99, 189, 99);
