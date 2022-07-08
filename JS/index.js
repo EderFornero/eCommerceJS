@@ -73,7 +73,6 @@ stockGPU.forEach((producto) => {
 const addCarrito = (prodId) => {
     const item = stockGPU.find((prod) => prod.id === prodId);
     carrito.push(item);
-    actualizarCarrito();
     console.log(carrito);
 }
 
