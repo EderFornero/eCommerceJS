@@ -1,17 +1,27 @@
+//User
+const nombreUsuario = document.getElementById("user");
+
+
+
+
 //Search
 let search = document.getElementById("search");
-search.addEventListener("keydown", (e) => {
-    e.preventDefault();
-    console.log(search);
-})
 
-//Formulario---------------------------------------------------------------------------------------
+
+
+search.addEventListener("keyup", () => {
+
+    console.log(search.value)
+
+});
+
+//Form---------------------------------------------------------------------------------------
 
 let formInput = document.getElementById('formInput');
-let formulario = document.getElementById("formulario");
-formulario.addEventListener("submit", reconocimiento);
+let form = document.getElementById("form");
+form.addEventListener("submit", recognition);
 
-function reconocimiento(e) {
+function recognition(e) {
     e.preventDefault();
 
     console.log(formInput.value);
@@ -20,77 +30,183 @@ function reconocimiento(e) {
 
 }
 
-const saludo = document.getElementById("saludo");
+const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        saludo.className = "green";
+        greeting.className = "green";
     }
 
 })
 
 //Stock---------------------------------------------------------------------------------------------
-const contenedorProductos = document.getElementById("contenedor-productos");
+const containerProduct = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById("carrito-contenedor");
 //Carrito
 let carrito = [];
 let stockGPU = [
-    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: "595,43", img: `./images/Productos/1660.jpg` },
-    { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: "1", price: "1000", img: `./images/Productos/2070.jpg` },
-    { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: "714,52", img: `./images/Productos/570.webp` },
-    { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1",  price: "952,69", img: `./images/Productos/580.jpg` },
-    { id: "4", name: "Ryzen 5 5600G", brand: "AMD", amount: "1", price: "276,47", img: `./images/Productos/AMD-5600g.jpg` },
-    { id: "5", name: "Ryzen 5 5600X", brand: "AMD", amount: "1", price: "400,72", img: `./images/Productos/AMD-5600x.jpg` },
-    { id: "6", name: "Core i5-10600KF", brand: "Intel", amount: "1", price: "308,64", img: `./images/Productos/CoreI5-10dc.jpg` },
-    { id: "7", name: "Core i5-11600KF", brand: "Intel", amount: "1", price: "363,50", img: `./images/Productos/CPU-CoreI5-11va.webp` },
+    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43, img: `./images/Productos/1660.jpg` },
+    { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: 1, price: 1000, img: `./images/Productos/2070.jpg` },
+    { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: 714.52, img: `./images/Productos/570.webp` },
+    { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1", price: 952.69, img: `./images/Productos/580.jpg` },
+    { id: "4", name: "GIGABYTE GEFORCE GTX 1060 6GB OC", brand: "Nvidia", amount: "1", price: 336.02, img: `./images/Productos/1060.jpg` },
+    { id: "5", name: "Procesador Ryzen 5 5600G", brand: "AMD", amount: "1", price: 276.47 , img: `./images/Productos/AMD-5600g.jpg` },
+    { id: "6", name: "Procesador Ryzen 5 5600X", brand: "AMD", amount: "1", price: 400.72, img: `./images/Productos/AMD-5600x.jpg` },
+    { id: "7", name: "Procesador Core i5-10600KF", brand: "Intel", amount: "1", price: 308.64, img: `./images/Productos/CoreI5-10dc.jpg` },
+    { id: "8", name: "Procesador Core i5-11600KF", brand: "Intel", amount: "1", price: 363.50, img: `./images/Productos/CPU-CoreI5-11va.webp` },
 ];
 
 
-
-
+const addCarrito = (prodId) => {
+    const item = stockGPU.find((prod) => prod.id === prodId);
+    carrito.push(item);
+}
 
 stockGPU.forEach((producto) => {
     const div = document.createElement("div")
     div.classList.add("producto")
     div.innerHTML = `
     <img class="img-producto" src =${producto.img} alt= ""> 
-    <h3 class="nameProducto">${producto.name}</h3>
+    <h3 class="nameProducto">${producto.name}</h3> 
     <p>Marca: ${producto.brand}</p>
     <p class="precioProducto">$${producto.price}</p>
     <button id = "agregar${producto.id}" class = "boton-agregar">Agregar<i class = "fas fa-shopping-cart"></i></button>
     `
 
-    contenedorProductos.appendChild(div);
+    containerProduct.appendChild(div);
 
     const boton = document.getElementById(`agregar${producto.id}`);
 
-    boton.addEventListener('click', () => {
-        addCarrito(producto.id)
-    })
+    boton.addEventListener('click', addBotonClick)
+    addCarrito(producto.id);
+
 });
 
+//------------------------------------------------------------------------------
 
-const addCarrito = (prodId) => {
-    const item = stockGPU.find((prod) => prod.id === prodId);
-    carrito.push(item);
-    console.log(carrito);
+
+function addBotonClick(e) {
+    const button = e.target;
+    const product = button.closest('.producto');
+
+    const productTittle = product.querySelector('.nameProducto').textContent;
+
+    const productPrice = product.querySelector('.precioProducto').textContent;
+
+    const productImage = product.querySelector('.img-producto').src;
+
+
+    addToShoppingCart(productTittle, productPrice, productImage);
 }
 
-const actualizarCarrito = () => { 
-   contenedorCarrito.innerHTML = ""; 
-  carrito.forEach((prod) => { 
-    const div = document.createElement('div'); 
-    div.className = ('productoEnCarrito'); 
-    div.innerHTML = `
-    <p> ${prod.name}</p>
-    <p>Precio: ${prod.price}</p>
-    <p>Cantidad: <span id= "cantidad" ${prod.amount}</span></p>
-    <button onclick = "eliminarDelCarrito(${prod.id})" class = "boton-eliminar"><i class = "fas fa-trash-alt</i></button>
-    `
+const buyButton = document.querySelector('.comprarButton'); 
 
-    contenedorCarrito.appendChild(div); 
-  })
+
+const divCart = document.querySelector('.divCart');
+
+
+function addToShoppingCart(productTittle, productPrice, productImage) {
+    
+    
+    //funcion para no duplicar producto
+    const notDuplicate = divCart.getElementsByClassName('shoppingCartItemTitle');
+  
+    for(let i = 0; i < notDuplicate.length; i++){
+        if(notDuplicate[i].innerText === productTittle){
+           //parentElement para saltar al div padre de arriba y poder traer el elemento requerido
+           let addElement = notDuplicate[i].parentElement.parentElement.parentElement.querySelector('.shoppingCartItemQuantity');
+           addElement.value++; 
+           //agregar clase toast de bs
+           updateCart();
+           $('.toast').toast('show');
+           return;
+        };
+    };
+       
+    //insercion del carrito
+    const divCartRow = document.createElement('div');
+    const divContent = `<div class="row shoppingCartItem">
+    <div class="col-6">
+        <div class="shopping-add-cart d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+            <img src=${productImage} class="shopping-cart-image">
+            <h6 class="shopping-add-cart-title shoppingCartItemTitle text-truncate ml-3 mb-0">${productTittle}</h6>
+        </div>
+    </div>
+    <div class="col-2">
+        <div class="shopping-cart-price d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+            <p class="productPrice mb-0 shoppingCartItemPrice">${productPrice}</p>
+        </div>
+    </div>
+    <div class="col-4">
+        <div
+            class="shopping-cart-quantity d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
+            <input class="shopping-cart-quantity-input shoppingCartItemQuantity" type="number"
+                value="1">
+            <button class="btn btn-danger buttonDelete" type="button">X</button>
+        </div>
+    </div>
+</div>`;
+
+    divCartRow.innerHTML = divContent;
+    divCart.appendChild(divCartRow);
+
+    //boton eliminar
+    divCartRow.querySelector('.buttonDelete').addEventListener('click', removeProduct);
+    
+    //cantidad
+    divCartRow.querySelector('.shoppingCartItemQuantity').addEventListener('change', changeQuantity);
+
+    buyButton.addEventListener('click', buyButtonClick);
+    updateCart();
 }
+
+function updateCart() {
+    let amount = 0;
+
+    const cartAmount = document.querySelector('.cartAmount');
+
+    const addItem = document.querySelectorAll('.shoppingCartItem');
+
+    addItem.forEach((shoppingCart) => {
+
+        //recoger el precio
+        const cartPriceElement = shoppingCart.querySelector('.shoppingCartItemPrice');
+       
+        //sacar string
+        const cartNumber = Number(cartPriceElement.textContent.replace('$', ""));
+        
+
+        //establecer cantidad
+        const shoppingCartItemQuantity = shoppingCart.querySelector('.shoppingCartItemQuantity').value;
+      
+        //total
+
+        amount =  amount + cartNumber * shoppingCartItemQuantity;
+        cartAmount.innerHTML = `$${amount}`; 
+    });
+    
+}
+
+function removeProduct(e){ 
+    const removeClick = e.target; 
+    removeClick.closest('.shoppingCartItem').remove();
+    updateCart();
+}
+
+function changeQuantity(e){ 
+    const changeClick = e.target; 
+   if (changeClick.value <= 0){ 
+    changeClick.value = 1; 
+   }; 
+   updateCart(); 
+}
+
+function buyButtonClick(){ 
+    divCart.innerHTML = ''; 
+    updateCart();
+}
+
+
 //---------------------------------------------------------------------------------------------
 
 //localStorage
