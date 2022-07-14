@@ -25,7 +25,7 @@ function recognition(e) {
 
 //User
 const nombreUsuario = document.getElementById("userUp");
-let nameUser = ""; 
+ 
 const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
@@ -33,7 +33,7 @@ formInput.addEventListener("keydown", (e) => {
    
 })
 formInput.addEventListener("keyup", () => { 
-    nombreUsuario.innerHTML = nameUser; 
+    nombreUsuario.innerHTML = formInput.value; 
 })
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
