@@ -25,12 +25,16 @@ function recognition(e) {
 
 //User
 const nombreUsuario = document.getElementById("userUp");
+let nameUser = ""; 
 const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
     e.key === "Enter" ? greeting.className = "green" : null;
+   
 })
-
+formInput.addEventListener("keyup", () => { 
+    nombreUsuario.innerHTML = nameUser; 
+})
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
 let stockGPU = [
@@ -201,5 +205,7 @@ function buyButtonClick() {
 localStorage.setItem("stockGPU", JSON.stringify(stockGPU));
 
 //--------------------------------------------------------------
+
+
 
 
