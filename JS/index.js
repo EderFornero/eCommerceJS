@@ -1,13 +1,6 @@
-//User
-const nombreUsuario = document.getElementById("user");
-
-
-
 
 //Search
 let search = document.getElementById("search");
-
-
 
 search.addEventListener("keyup", () => {
 
@@ -30,32 +23,30 @@ function recognition(e) {
 
 }
 
+//User
+const nombreUsuario = document.getElementById("userUp");
 const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-        greeting.className = "green";
-    }
-
+    e.key === "Enter" ? greeting.className = "green" : null;
 })
 
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
-const contenedorCarrito = document.getElementById("carrito-contenedor");
-//Carrito
-let carrito = [];
 let stockGPU = [
     { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43, img: `./images/Productos/1660.jpg` },
     { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: 1, price: 1000, img: `./images/Productos/2070.jpg` },
     { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: 714.52, img: `./images/Productos/570.webp` },
     { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1", price: 952.69, img: `./images/Productos/580.jpg` },
     { id: "4", name: "GIGABYTE GEFORCE GTX 1060 6GB OC", brand: "Nvidia", amount: "1", price: 336.02, img: `./images/Productos/1060.jpg` },
-    { id: "5", name: "Procesador Ryzen 5 5600G", brand: "AMD", amount: "1", price: 276.47 , img: `./images/Productos/AMD-5600g.jpg` },
+    { id: "5", name: "Procesador Ryzen 5 5600G", brand: "AMD", amount: "1", price: 276.47, img: `./images/Productos/AMD-5600g.jpg` },
     { id: "6", name: "Procesador Ryzen 5 5600X", brand: "AMD", amount: "1", price: 400.72, img: `./images/Productos/AMD-5600x.jpg` },
     { id: "7", name: "Procesador Core i5-10600KF", brand: "Intel", amount: "1", price: 308.64, img: `./images/Productos/CoreI5-10dc.jpg` },
     { id: "8", name: "Procesador Core i5-11600KF", brand: "Intel", amount: "1", price: 363.50, img: `./images/Productos/CPU-CoreI5-11va.webp` },
 ];
 
+//Carrito
+let carrito = [];
 
 const addCarrito = (prodId) => {
     const item = stockGPU.find((prod) => prod.id === prodId);
@@ -99,30 +90,30 @@ function addBotonClick(e) {
     addToShoppingCart(productTittle, productPrice, productImage);
 }
 
-const buyButton = document.querySelector('.comprarButton'); 
+const buyButton = document.querySelector('.comprarButton');
 
 
 const divCart = document.querySelector('.divCart');
 
 
 function addToShoppingCart(productTittle, productPrice, productImage) {
-    
-    
+
+
     //funcion para no duplicar producto
     const notDuplicate = divCart.getElementsByClassName('shoppingCartItemTitle');
-  
-    for(let i = 0; i < notDuplicate.length; i++){
-        if(notDuplicate[i].innerText === productTittle){
-           //parentElement para saltar al div padre de arriba y poder traer el elemento requerido
-           let addElement = notDuplicate[i].parentElement.parentElement.parentElement.querySelector('.shoppingCartItemQuantity');
-           addElement.value++; 
-           //agregar clase toast de bs
-           updateCart();
-           $('.toast').toast('show');
-           return;
+
+    for (let i = 0; i < notDuplicate.length; i++) {
+        if (notDuplicate[i].innerText === productTittle) {
+            //parentElement para saltar al div padre de arriba y poder traer el elemento requerido
+            let addElement = notDuplicate[i].parentElement.parentElement.parentElement.querySelector('.shoppingCartItemQuantity');
+            addElement.value++;
+            //agregar clase toast de bs
+            updateCart();
+            $('.toast').toast('show');
+            return;
         };
     };
-       
+
     //insercion del carrito
     const divCartRow = document.createElement('div');
     const divContent = `<div class="row shoppingCartItem">
@@ -152,7 +143,7 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
 
     //boton eliminar
     divCartRow.querySelector('.buttonDelete').addEventListener('click', removeProduct);
-    
+
     //cantidad
     divCartRow.querySelector('.shoppingCartItemQuantity').addEventListener('change', changeQuantity);
 
@@ -171,38 +162,34 @@ function updateCart() {
 
         //recoger el precio
         const cartPriceElement = shoppingCart.querySelector('.shoppingCartItemPrice');
-       
+
         //sacar string
-        const cartNumber = Number(cartPriceElement.textContent.replace('$', ""));
-        
+        const cartPriceNumber = Number(cartPriceElement.textContent.replace('$', ''));
 
         //establecer cantidad
         const shoppingCartItemQuantity = shoppingCart.querySelector('.shoppingCartItemQuantity').value;
-      
-        //total
 
-        amount =  amount + cartNumber * shoppingCartItemQuantity;
-        cartAmount.innerHTML = `$${amount}`; 
+        //total
+        amount = amount + cartPriceNumber * shoppingCartItemQuantity;
+        cartAmount.innerHTML = `$${amount}`;
     });
-    
+
 }
 
-function removeProduct(e){ 
-    const removeClick = e.target; 
+function removeProduct(e) {
+    const removeClick = e.target;
     removeClick.closest('.shoppingCartItem').remove();
     updateCart();
 }
 
-function changeQuantity(e){ 
-    const changeClick = e.target; 
-   if (changeClick.value <= 0){ 
-    changeClick.value = 1; 
-   }; 
-   updateCart(); 
+function changeQuantity(e) {
+    const changeClick = e.target;
+    changeClick.value <= 0 ? changeClick.value = 1 : null;
+    updateCart();
 }
 
-function buyButtonClick(){ 
-    divCart.innerHTML = ''; 
+function buyButtonClick() {
+    divCart.innerHTML = '';
     updateCart();
 }
 
