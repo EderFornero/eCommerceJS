@@ -222,3 +222,13 @@ p {
     position: absolute;
     left: 90%;
 }
+
+.btnAceptar{ 
+    background-color: #563d7c;
+    border: 1px solid #563d7c;
+}
+
+.btnAceptar:hover{ 
+    border: 1px solid green;
+    background-color: green;
+}

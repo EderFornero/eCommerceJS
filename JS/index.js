@@ -18,6 +18,7 @@ function recognition(e) {
     e.preventDefault();
 
     console.log(formInput.value);
+    //local storage user
     localStorage.setItem("user", JSON.stringify(formInput.value));
 
 
@@ -25,15 +26,15 @@ function recognition(e) {
 
 //User
 const nombreUsuario = document.getElementById("userUp");
- 
+
 const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
     e.key === "Enter" ? greeting.className = "green" : null;
-   
+
 })
-formInput.addEventListener("keyup", () => { 
-    nombreUsuario.innerHTML = formInput.value; 
+formInput.addEventListener("keyup", () => {
+    nombreUsuario.innerHTML = formInput.value;
 })
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
@@ -107,20 +108,18 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
     const notDuplicate = divCart.getElementsByClassName('shoppingCartItemTitle');
 
     for (let i = 0; i < notDuplicate.length; i++) {
-        if (notDuplicate[i].innerText === productTittle) {
-            //parentElement para saltar al div padre de arriba y poder traer el elemento requerido
-            let addElement = notDuplicate[i].parentElement.parentElement.parentElement.querySelector('.shoppingCartItemQuantity');
-            addElement.value++;
-            //agregar clase toast de bs
-            updateCart();
-            $('.toast').toast('show');
-            return;
-        };
+        let addElement = '';
+        notDuplicate[i].innerText === productTittle ? addElement = notDuplicate[i].parentElement.parentElement.parentElement.querySelector(
+        '.shoppingCartItemQuantity') : addElement.value++;
+        updateCart();
+        $('.toast').toast('show');
+        return;
     };
 
     //insercion del carrito
     const divCartRow = document.createElement('div');
-    const divContent = `<div class="row shoppingCartItem">
+    const divContent = `
+<div class="row shoppingCartItem">
     <div class="col-6">
         <div class="shopping-add-cart d-flex align-items-center h-100 border-bottom pb-2 pt-3">
             <img src=${productImage} class="shopping-cart-image">
@@ -146,38 +145,59 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
     divCart.appendChild(divCartRow);
 
     //boton eliminar
-    divCartRow.querySelector('.buttonDelete').addEventListener('click', removeProduct);
+    divCartRow.querySelector('.buttonDelete').addEventListener(
+        'click', removeProduct
+    );
 
     //cantidad
-    divCartRow.querySelector('.shoppingCartItemQuantity').addEventListener('change', changeQuantity);
+    divCartRow.querySelector('.shoppingCartItemQuantity').addEventListener(
+        'change', changeQuantity
+    );
 
+    //comprar
     buyButton.addEventListener('click', buyButtonClick);
+
+    //actualizar carrito
     updateCart();
+
 }
 
 function updateCart() {
     let amount = 0;
 
-    const cartAmount = document.querySelector('.cartAmount');
+    const shoppingCartTotal = document.querySelector(
+        '.shoppingCartTotal'
+    );
 
-    const addItem = document.querySelectorAll('.shoppingCartItem');
+
+    const addItem = document.querySelectorAll(
+        '.shoppingCartItem'
+    );
 
     addItem.forEach((shoppingCart) => {
 
         //recoger el precio
-        const cartPriceElement = shoppingCart.querySelector('.shoppingCartItemPrice');
+        const cartPriceElement = shoppingCart.querySelector(
+            '.shoppingCartItemPrice'
+        );
 
         //sacar string
-        const cartPriceNumber = Number(cartPriceElement.textContent.replace('$', ''));
+        const cartPriceNumber = Number(
+            cartPriceElement.textContent.replace('$', '')
+        );
 
         //establecer cantidad
-        const shoppingCartItemQuantity = shoppingCart.querySelector('.shoppingCartItemQuantity').value;
+        const shoppingCartItemQuantity = shoppingCart.querySelector(
+            '.shoppingCartItemQuantity'
+        ).value;
+
 
         //total
         amount = amount + cartPriceNumber * shoppingCartItemQuantity;
-        cartAmount.innerHTML = `$${amount}`;
+
     });
 
+    shoppingCartTotal.innerHTML = `$${amount.toFixed(2)} USD`;
 }
 
 function removeProduct(e) {
@@ -197,6 +217,35 @@ function buyButtonClick() {
     updateCart();
 }
 
+
+
+//Compra realizada
+alertElementInCart = document.getElementById('alertElementInCart');
+
+const div = document.createElement('div');
+
+div.innerHTML = ` <div class="modal fade" id="comprarModal" tabindex="-1" aria-labelledby="comprarModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="comprarModalLabel">COMPRA REALIZADA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+        <div class="modal-body">
+            <p>¡Muchas gracias por su compra!
+               <strong>Pronto enviaremos su pedido</strong> 
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btnAceptar" data-dismiss="modal">Aceptar</button>
+        </div>
+    </div>
+    </div>
+</div>`;
+
+alertBuy.appendChild(div);
 
 //---------------------------------------------------------------------------------------------
 
