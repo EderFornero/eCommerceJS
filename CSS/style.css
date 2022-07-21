@@ -48,7 +48,12 @@ p {
 .qty {
     font-size: 12px;
 }
-
+#contact{ 
+    display: flex;
+    align-items: center;
+    position: relative; 
+    left: 25px;
+}
 .div-h1 {
     display: flex;
     justify-content: center;

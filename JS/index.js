@@ -127,7 +127,7 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
             );
             addElement.value++;
             $('.toast').toast('show');
-            updateShoppingCartTotal();
+            updateCart();
             return;
           }
     };
