@@ -64,8 +64,8 @@ p {
 }
 
 /*saludo*/
-.green {
-    background-color: rgb(99, 189, 99);
+.oficialColor {
+    background-color: #563d7c; 
 }
 
 .div-form {

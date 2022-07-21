@@ -1,4 +1,12 @@
-
+//Contacto
+const contact = document.getElementById('contact');
+contact.addEventListener('click', () => { 
+    Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      );
+})
 //Search
 let search = document.getElementById("search");
 
@@ -30,8 +38,10 @@ const nombreUsuario = document.getElementById("userUp");
 const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
-    e.key === "Enter" ? greeting.className = "green" : null;
-
+    e.key === "Enter" ? greeting.className = "oficialColor" : null;
+    setTimeout(() =>{ 
+     greeting.classList.remove("oficialColor"); 
+    }, 1000); 
 })
 formInput.addEventListener("keyup", () => {
     nombreUsuario.innerHTML = formInput.value;
@@ -109,11 +119,17 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
 
     for (let i = 0; i < notDuplicate.length; i++) {
         let addElement = '';
-        notDuplicate[i].innerText === productTittle ? addElement = notDuplicate[i].parentElement.parentElement.parentElement.querySelector(
-        '.shoppingCartItemQuantity') : addElement.value++;
-        updateCart();
-        $('.toast').toast('show');
-        return;
+        if (notDuplicate[i].innerText === productTittle) {
+            let addElement = notDuplicate[
+              i
+            ].parentElement.parentElement.parentElement.querySelector(
+              '.shoppingCartItemQuantity'
+            );
+            addElement.value++;
+            $('.toast').toast('show');
+            updateShoppingCartTotal();
+            return;
+          }
     };
 
     //insercion del carrito
