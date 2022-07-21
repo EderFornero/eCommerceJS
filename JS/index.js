@@ -2,20 +2,19 @@
 const contact = document.getElementById('contact');
 contact.addEventListener('click', () => { 
     Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
+        '¡Envíame tus dudas!',
+        'ederfornero.ef@gmail.com', 
+        'info'
       );
 })
 //Search
-let search = document.getElementById("search");
+const search = document.getElementById("search");
+const btnSearch = document.getElementById('btnSearch');
 
-search.addEventListener("keyup", () => {
-
-    console.log(search.value)
-
-});
-
+btnSearch.addEventListener('click', () =>{ 
+  console.log(search.value); 
+  localStorage.setItem("btnSearch", JSON.stringify(search.value)); 
+})
 //Form---------------------------------------------------------------------------------------
 
 let formInput = document.getElementById('formInput');
@@ -42,14 +41,17 @@ formInput.addEventListener("keydown", (e) => {
     setTimeout(() =>{ 
      greeting.classList.remove("oficialColor"); 
     }, 1000); 
-})
+});
+
 formInput.addEventListener("keyup", () => {
     nombreUsuario.innerHTML = formInput.value;
-})
+});
+
+
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
 let stockGPU = [
-    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43, img: `./images/Productos/1660.jpg` },
+    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43 , img: `./images/Productos/1660.jpg` },
     { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: 1, price: 1000, img: `./images/Productos/2070.jpg` },
     { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: 714.52, img: `./images/Productos/570.webp` },
     { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1", price: 952.69, img: `./images/Productos/580.jpg` },
@@ -75,7 +77,7 @@ stockGPU.forEach((producto) => {
     <img class="img-producto" src =${producto.img} alt= ""> 
     <h3 class="nameProducto">${producto.name}</h3> 
     <p>Marca: ${producto.brand}</p>
-    <p class="precioProducto">$${producto.price}</p>
+    <p class="precioProducto">$${producto.price} USD</p>
     <button id = "agregar${producto.id}" class = "boton-agregar">Agregar<i class = "fas fa-shopping-cart"></i></button>
     `
 
@@ -244,7 +246,7 @@ div.innerHTML = ` <div class="modal fade" id="comprarModal" tabindex="-1" aria-l
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="comprarModalLabel">COMPRA REALIZADA</h5>
+            <h5 class="modal-title" id="comprarModalLabel">ENCARGO RECOGIDO</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -268,7 +270,6 @@ alertBuy.appendChild(div);
 //localStorage
 
 localStorage.setItem("stockGPU", JSON.stringify(stockGPU));
-
 //--------------------------------------------------------------
 
 
