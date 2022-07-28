@@ -302,7 +302,7 @@ const dataStock = async () => {
 
 
     } catch (error) {
-        console.log(error);
+        console.log("¡ERROR! No se ha podido obtener los datos");
     }
 };
 
@@ -314,6 +314,7 @@ dataStock();
 //localStorage
 
 localStorage.setItem("stockGPU", JSON.stringify(stockGPU));
+localStorage.setItem("dataStock", JSON.stringify(dataContainer));
 //--------------------------------------------------------------
 
 
