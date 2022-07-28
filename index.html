@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/dee9022ec5.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./CSS/style.css">
+
 
     <title>Eder´s eCommerce</title>
 </head>
@@ -29,7 +31,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link d-flex align-items-center" data-abc="true">
-                            <p id="userUp">Usuario</p><i class='bx bxs-chevron-down'></i>
+                            <p class="usuarioIngresar" id="userUp">Usuario</p><i class='bx bxs-chevron-down'></i>
                         </a>
                     </li>
 
@@ -41,11 +43,11 @@
         </nav>
         <!-- header-top-light.// -->
 
-        <section class="header-main border-bottom bg-white">
+        <section class="header-main border-bottom bgCustom">
             <div class="container-fluid">
                 <div class="row p-2 pt-3 pb-3 d-flex align-items-center">
                     <div class="col-md-2">
-                        <img class="d-none d-md-flex" src="./images/logo/ederlogo.jpeg" width="200">
+                        <img class="d-none d-md-flex" src="./images/logo/ederlogo.png" width="200">
                     </div>
                     <div class="col-md-8">
                         <div class="d-flex form-inputs">
@@ -61,6 +63,13 @@
 
 
     </header>
+
+    <div class="btnSwitchDiv">
+        <button class="switchClass" id="switch">
+            <span class="spanSwitch"><i class="fa-solid fa-sun"></i></span>
+            <span class="spanSwitch"><i class="fa-solid fa-moon"></i></span>
+        </button>
+    </div>
 
     <div class="div-h1">
         <h1 id="greeting">¡Bienvenido/a!</h1>

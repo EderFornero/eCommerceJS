@@ -8,6 +8,13 @@ contact.addEventListener('click', () => {
     );
 });
 
+const btnSwitch = document.getElementById('switch');
+
+btnSwitch.addEventListener('click', () => {
+    document.body.classList.toggle('darkMode');
+    btnSwitch.classList.toggle('active');
+})
+
 //Search
 const search = document.getElementById("search");
 const btnSearch = document.getElementById('btnSearch');
@@ -16,6 +23,7 @@ btnSearch.addEventListener('click', () => {
     console.log(search.value);
     localStorage.setItem("btnSearch", JSON.stringify(search.value));
 })
+
 //Form---------------------------------------------------------------------------------------
 
 let formInput = document.getElementById('formInput');
@@ -33,7 +41,9 @@ function recognition(e) {
 }
 
 //User
-const nombreUsuario = document.getElementById("userUp");
+const nameUser = document.getElementById("userUp");
+
+const userJoin = document.querySelector('.usuarioIngresar');
 
 const greeting = document.getElementById("greeting");
 
@@ -45,9 +55,12 @@ formInput.addEventListener("keydown", (e) => {
 });
 
 formInput.addEventListener("keyup", () => {
-    nombreUsuario.innerHTML = formInput.value;
+    nameUser.innerHTML = formInput.value;
 });
 
+nameUser.addEventListener('click', () => {
+    nameUser.textContent === 'Usuario' ? alert('Porfavor ingrese nombre de usuario') : null;
+})
 
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
@@ -286,6 +299,7 @@ const dataStock = async () => {
          <p class="precioProducto">$${prod.price} USD</p>
          <button id="functionClick${prod.id}" class = "botonProximamente">Próximamente<i class = "fas fa-shopping-cart"></i></button>
          `
+            
 
             dataContainer.append(div)
 
@@ -314,7 +328,7 @@ dataStock();
 //localStorage
 
 localStorage.setItem("stockGPU", JSON.stringify(stockGPU));
-localStorage.setItem("dataStock", JSON.stringify(dataContainer));
+localStorage.setItem("dataStock", JSON.stringify(data));
 //--------------------------------------------------------------
 
 
