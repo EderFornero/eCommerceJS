@@ -1,19 +1,20 @@
 //Contacto
 const contact = document.getElementById('contact');
-contact.addEventListener('click', () => { 
+contact.addEventListener('click', () => {
     Swal.fire(
         '¡Envíame tus dudas!',
-        'ederfornero.ef@gmail.com', 
+        'ederfornero.ef@gmail.com',
         'info'
-      );
-})
+    );
+});
+
 //Search
 const search = document.getElementById("search");
 const btnSearch = document.getElementById('btnSearch');
 
-btnSearch.addEventListener('click', () =>{ 
-  console.log(search.value); 
-  localStorage.setItem("btnSearch", JSON.stringify(search.value)); 
+btnSearch.addEventListener('click', () => {
+    console.log(search.value);
+    localStorage.setItem("btnSearch", JSON.stringify(search.value));
 })
 //Form---------------------------------------------------------------------------------------
 
@@ -38,9 +39,9 @@ const greeting = document.getElementById("greeting");
 
 formInput.addEventListener("keydown", (e) => {
     e.key === "Enter" ? greeting.className = "oficialColor" : null;
-    setTimeout(() =>{ 
-     greeting.classList.remove("oficialColor"); 
-    }, 1000); 
+    setTimeout(() => {
+        greeting.classList.remove("oficialColor");
+    }, 1000);
 });
 
 formInput.addEventListener("keyup", () => {
@@ -51,7 +52,7 @@ formInput.addEventListener("keyup", () => {
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
 let stockGPU = [
-    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43 , img: `./images/Productos/1660.jpg` },
+    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43, img: `./images/Productos/1660.jpg` },
     { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: 1, price: 1000, img: `./images/Productos/2070.jpg` },
     { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: 714.52, img: `./images/Productos/570.webp` },
     { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1", price: 952.69, img: `./images/Productos/580.jpg` },
@@ -120,18 +121,17 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
     const notDuplicate = divCart.getElementsByClassName('shoppingCartItemTitle');
 
     for (let i = 0; i < notDuplicate.length; i++) {
-        let addElement = '';
         if (notDuplicate[i].innerText === productTittle) {
             let addElement = notDuplicate[
-              i
+                i
             ].parentElement.parentElement.parentElement.querySelector(
-              '.shoppingCartItemQuantity'
+                '.shoppingCartItemQuantity'
             );
             addElement.value++;
             $('.toast').toast('show');
             updateCart();
             return;
-          }
+        }
     };
 
     //insercion del carrito
@@ -168,9 +168,9 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
     );
 
     //cantidad
-    divCartRow.querySelector('.shoppingCartItemQuantity').addEventListener(
-        'change', changeQuantity
-    );
+    divCartRow
+        .querySelector('.shoppingCartItemQuantity')
+        .addEventListener('change', changeQuantity);
 
     //comprar
     buyButton.addEventListener('click', buyButtonClick);
@@ -200,18 +200,21 @@ function updateCart() {
         );
 
         //sacar string
-        const cartPriceNumber = Number(
+        const cartPriceNumber = parseFloat(
             cartPriceElement.textContent.replace('$', '')
         );
 
         //establecer cantidad
         const shoppingCartItemQuantity = shoppingCart.querySelector(
             '.shoppingCartItemQuantity'
-        ).value;
+        );
 
+        const shoppingCartItemQuantityValue = parseFloat(
+            shoppingCartItemQuantity.value
+        );
 
         //total
-        amount = amount + cartPriceNumber * shoppingCartItemQuantity;
+        amount = amount + cartPriceNumber * shoppingCartItemQuantityValue;
 
     });
 
@@ -242,7 +245,7 @@ alertElementInCart = document.getElementById('alertElementInCart');
 
 const div = document.createElement('div');
 
-div.innerHTML = ` <div class="modal fade" id="comprarModal" tabindex="-1" aria-labelledby="comprarModalLabel" aria-hidden="true">
+div.innerHTML = `<div class="modal fade" id="comprarModal" tabindex="-1" aria-labelledby="comprarModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
@@ -264,6 +267,47 @@ div.innerHTML = ` <div class="modal fade" id="comprarModal" tabindex="-1" aria-l
 </div>`;
 
 alertBuy.appendChild(div);
+
+
+//fetch 
+const dataContainer = document.getElementById('contenedorDataStock')
+const dataStock = async () => {
+    try {
+        const resp = await fetch("../JSON/dataStock.json");
+        const data = await resp.json();
+
+        data.forEach(prod => {
+            const div = document.createElement('div')
+            div.classList.add("producto")
+            div.innerHTML = `
+         <img class="img-producto" src =${prod.img} alt= ""> 
+         <h3 class="nameProducto">${prod.name}</h3> 
+         <p>Marca: ${prod.brand}</p>
+         <p class="precioProducto">$${prod.price} USD</p>
+         <button id="functionClick${prod.id}" class = "botonProximamente">Próximamente<i class = "fas fa-shopping-cart"></i></button>
+         `
+
+            dataContainer.append(div)
+
+            const btn = document.getElementById(`functionClick${prod.id}`);
+
+            btn.addEventListener('click', () => {
+                Swal.fire({
+                    icon: 'error',
+                    title: '¡Alerta!',
+                    text: 'Este artículo NO se encuentra en stock'
+                })
+            });
+        });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+dataStock();
+
 
 //---------------------------------------------------------------------------------------------
 

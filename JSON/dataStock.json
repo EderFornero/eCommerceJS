@@ -1,0 +1,6 @@
+[
+    { "id": "0", "name": "GeForce RTX 30 Series RTX 3090 24GB", "brand": "Nvidia", "amount": 1, "price": 3438.15, "img": "./images/Productos/Proximamente/3090.webp" },
+    { "id": "1", "name": "Microprocesador AMD Ryzen 9 5900X", "brand": "AMD", "amount": "1", "price": 778.54, "img": "./images/Productos/Proximamente/ryzen9.jpg" },
+    { "id": "2", "name": "Sony PlayStation 5 825GB Standard", "brand": "SONY", "amount": "1", "price": 2131.65, "img": "./images/Productos/Proximamente/ps5.webp" }
+    
+]
