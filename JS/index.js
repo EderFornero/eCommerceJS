@@ -286,7 +286,7 @@ alertBuy.appendChild(div);
 const dataContainer = document.getElementById('contenedorDataStock')
 const dataStock = async () => {
     try {
-        const resp = await fetch("../JSON/dataStock.json");
+        const resp = await fetch("./JSON/dataStock.json");
         const data = await resp.json();
 
         data.forEach(prod => {
