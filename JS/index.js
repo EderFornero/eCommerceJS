@@ -64,17 +64,17 @@ nameUser.addEventListener('click', () => {
 
 //Stock---------------------------------------------------------------------------------------------
 const containerProduct = document.getElementById("contenedor-productos");
-let stockGPU = [
-    { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43, img: `./images/Productos/1660.jpg` },
-    { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: 1, price: 1000, img: `./images/Productos/2070.jpg` },
-    { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: 714.52, img: `./images/Productos/570.webp` },
-    { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1", price: 952.69, img: `./images/Productos/580.jpg` },
-    { id: "4", name: "GIGABYTE GEFORCE GTX 1060 6GB OC", brand: "Nvidia", amount: "1", price: 336.02, img: `./images/Productos/1060.jpg` },
-    { id: "5", name: "Procesador Ryzen 5 5600G", brand: "AMD", amount: "1", price: 276.47, img: `./images/Productos/AMD-5600g.jpg` },
-    { id: "6", name: "Procesador Ryzen 5 5600X", brand: "AMD", amount: "1", price: 400.72, img: `./images/Productos/AMD-5600x.jpg` },
-    { id: "7", name: "Procesador Core i5-10600KF", brand: "Intel", amount: "1", price: 308.64, img: `./images/Productos/CoreI5-10dc.jpg` },
-    { id: "8", name: "Procesador Core i5-11600KF", brand: "Intel", amount: "1", price: 363.50, img: `./images/Productos/CPU-CoreI5-11va.webp` },
-];
+// let stockGPU = [
+//     { id: "0", name: "GIGABYTE GEFORCE GTX 1660", brand: "Nvidia", amount: "1", price: 595.43, img: `./images/Productos/1660.jpg` },
+//     { id: "1", name: "GIGABYTE GEFORCE RTX 2070 SUPER WINDFORCE OC", brand: "Nvidia", amount: 1, price: 1000, img: `./images/Productos/2070.jpg` },
+//     { id: "2", name: "MSI Radeon RX 570 Armor ARMOR 8G OC", brand: "AMD", amount: "1", price: 714.52, img: `./images/Productos/570.webp` },
+//     { id: "3", name: "Sapphire Radeon RX 580 Nitro Plus", brand: "AMD", amount: "1", price: 952.69, img: `./images/Productos/580.jpg` },
+//     { id: "4", name: "GIGABYTE GEFORCE GTX 1060 6GB OC", brand: "Nvidia", amount: "1", price: 336.02, img: `./images/Productos/1060.jpg` },
+//     { id: "5", name: "Procesador Ryzen 5 5600G", brand: "AMD", amount: "1", price: 276.47, img: `./images/Productos/AMD-5600g.jpg` },
+//     { id: "6", name: "Procesador Ryzen 5 5600X", brand: "AMD", amount: "1", price: 400.72, img: `./images/Productos/AMD-5600x.jpg` },
+//     { id: "7", name: "Procesador Core i5-10600KF", brand: "Intel", amount: "1", price: 308.64, img: `./images/Productos/CoreI5-10dc.jpg` },
+//     { id: "8", name: "Procesador Core i5-11600KF", brand: "Intel", amount: "1", price: 363.50, img: `./images/Productos/CPU-CoreI5-11va.webp` },
+// ];
 
 //Carrito
 let carrito = [];
@@ -84,25 +84,58 @@ const addCarrito = (prodId) => {
     carrito.push(item);
 }
 
-stockGPU.forEach((producto) => {
-    const div = document.createElement("div")
-    div.classList.add("producto")
-    div.innerHTML = `
-    <img class="img-producto" src =${producto.img} alt= ""> 
-    <h3 class="nameProducto">${producto.name}</h3> 
-    <p>Marca: ${producto.brand}</p>
-    <p class="precioProducto">$${producto.price} USD</p>
-    <button id = "agregar${producto.id}" class = "boton-agregar">Agregar<i class = "fas fa-shopping-cart"></i></button>
-    `
+let stockGPU = async () => {
+    try {
+        const resp = await fetch("./JSON/stockOficial.json");
+        const data = await resp.json();
 
-    containerProduct.appendChild(div);
+        data.forEach(producto => {
 
-    const boton = document.getElementById(`agregar${producto.id}`);
+            const div = document.createElement("div")
+            div.classList.add("producto")
+            div.innerHTML = `
+            <img class="img-producto" src =${producto.img} alt= ""> 
+            <h3 class="nameProducto">${producto.name}</h3> 
+            <p>Marca: ${producto.brand}</p>
+            <p class="precioProducto">$${producto.price} USD</p>
+            <button id = "agregar${producto.id}" class = "boton-agregar">Agregar<i class = "fas fa-shopping-cart"></i></button>
+            `
 
-    boton.addEventListener('click', addBotonClick)
-    addCarrito(producto.id);
+            containerProduct.appendChild(div);
+            
 
-});
+            const boton = document.getElementById(`agregar${producto.id}`);
+
+            boton.addEventListener('click', addBotonClick)
+            addCarrito(producto.id);
+        });
+
+    }catch (error){
+        console.log("Error");
+    }
+}
+stockGPU();
+
+
+// stockGPU.forEach((producto) => {
+//     const div = document.createElement("div")
+//     div.classList.add("producto")
+//     div.innerHTML = `
+//     <img class="img-producto" src =${producto.img} alt= ""> 
+//     <h3 class="nameProducto">${producto.name}</h3> 
+//     <p>Marca: ${producto.brand}</p>
+//     <p class="precioProducto">$${producto.price} USD</p>
+//     <button id = "agregar${producto.id}" class = "boton-agregar">Agregar<i class = "fas fa-shopping-cart"></i></button>
+//     `
+
+//     containerProduct.appendChild(div);
+
+//     const boton = document.getElementById(`agregar${producto.id}`);
+
+//     boton.addEventListener('click', addBotonClick)
+//     addCarrito(producto.id);
+
+// });
 
 //------------------------------------------------------------------------------
 
@@ -299,7 +332,7 @@ const dataStock = async () => {
          <p class="precioProducto">$${prod.price} USD</p>
          <button id="functionClick${prod.id}" class = "botonProximamente">Próximamente<i class = "fas fa-shopping-cart"></i></button>
          `
-            
+
 
             dataContainer.append(div)
 
@@ -326,10 +359,6 @@ dataStock();
 
 //---------------------------------------------------------------------------------------------
 
-//localStorage
-
-localStorage.setItem("stockGPU", JSON.stringify(stockGPU));
-//--------------------------------------------------------------
 
 
 
