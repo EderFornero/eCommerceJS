@@ -63,10 +63,11 @@ nameUser.addEventListener('click', () => {
 })
 
 //Stock---------------------------------------------------------------------------------------------
-const containerProduct = document.getElementById("contenedor-productos");
 
 //Carrito
-let carrito = [];
+let carrito = {};
+
+const containerProduct = document.getElementById("contenedor-productos");
 
 let stockGPU = async () => {
     try {
@@ -99,9 +100,21 @@ let stockGPU = async () => {
         console.log("Error");
     }
 }
-stockGPU();
 
+stockGPU(); 
 
+//Funcion nueva de LS
+window.onload = function (){ 
+    const lStorage = JSON.parse(localStorage.getItem('carrito'))
+    if(lStorage){ 
+        carrito = lStorage; 
+        addToShoppingCart();
+    }
+}
+
+function addLocalStorage(){
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+}
 
 //------------------------------------------------------------------------------
 
@@ -171,7 +184,7 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
         </div>
     </div>
 </div>`;
-    localStorage.setItem(productTittle, JSON.stringify(divContent));
+    
     divCartRow.innerHTML = divContent;
     divCart.appendChild(divCartRow);
 
@@ -189,13 +202,13 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
     buyButton.addEventListener('click', buyButtonClick);
 
     //actualizar carrito
+    addLocalStorage();
     updateCart();
-
 }
 
 function updateCart() {
     let amount = 0;
-
+    
     const shoppingCartTotal = document.querySelector(
         '.shoppingCartTotal'
     );
@@ -232,6 +245,7 @@ function updateCart() {
     });
 
     shoppingCartTotal.innerHTML = `$${amount.toFixed(2)} USD`;
+   
 }
 
 function removeProduct(e) {
