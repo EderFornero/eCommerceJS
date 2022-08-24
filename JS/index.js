@@ -65,7 +65,7 @@ nameUser.addEventListener('click', () => {
 //Stock---------------------------------------------------------------------------------------------
 
 //Carrito
-let carrito = {};
+let carrito = [];
 
 const containerProduct = document.getElementById("contenedor-productos");
 
@@ -101,28 +101,35 @@ let stockGPU = async () => {
     }
 }
 
-stockGPU(); 
+stockGPU();
 
-//Funcion nueva de LS
-window.onload = function (){ 
+
+window.onload = function () {
+    let keyTitle = 'title' + counter
+    let keyPrice = 'price' + counter
+    let keyImage = 'image' + counter
     const lStorage = JSON.parse(localStorage.getItem('carrito'))
-    if(lStorage){ 
-        carrito = lStorage; 
-        addToShoppingCart();
+    if (lStorage) {
+        carrito = lStorage;
+        addToShoppingCart(lStorage[keyTitle], lStorage[keyPrice], lStorage[keyImage]);
     }
 }
 
-function addLocalStorage(){
+function addLocalStorage() {
     localStorage.setItem('carrito', JSON.stringify(carrito))
 }
 
 //------------------------------------------------------------------------------
 
+let counter = 1;
 
 function addBotonClick(e) {
+    
     const button = e.target;
     const product = button.closest('.producto');
-
+    let keyTitle = 'title' + counter
+    let keyPrice = 'price' + counter
+    let keyImage = 'image' + counter
 
     const productTittle = product.querySelector('.nameProducto').textContent;
 
@@ -130,8 +137,13 @@ function addBotonClick(e) {
 
     const productImage = product.querySelector('.img-producto').src;
 
+    carrito = {
+        [keyTitle]: productTittle, [keyPrice]: productPrice, [keyImage]: productImage
+    }
 
+    console.log(carrito);
     addToShoppingCart(productTittle, productPrice, productImage);
+    counter++;
 }
 
 const buyButton = document.querySelector('.comprarButton');
@@ -184,7 +196,7 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
         </div>
     </div>
 </div>`;
-    
+
     divCartRow.innerHTML = divContent;
     divCart.appendChild(divCartRow);
 
@@ -208,7 +220,7 @@ function addToShoppingCart(productTittle, productPrice, productImage) {
 
 function updateCart() {
     let amount = 0;
-    
+
     const shoppingCartTotal = document.querySelector(
         '.shoppingCartTotal'
     );
@@ -245,7 +257,7 @@ function updateCart() {
     });
 
     shoppingCartTotal.innerHTML = `$${amount.toFixed(2)} USD`;
-   
+
 }
 
 function removeProduct(e) {
