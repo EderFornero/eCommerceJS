@@ -105,31 +105,24 @@ stockGPU();
 
 
 window.onload = function () {
-    let keyTitle = 'title' + counter
-    let keyPrice = 'price' + counter
-    let keyImage = 'image' + counter
     const lStorage = JSON.parse(localStorage.getItem('carrito'))
     if (lStorage) {
-        carrito = lStorage;
-        addToShoppingCart(lStorage[keyTitle], lStorage[keyPrice], lStorage[keyImage]);
+        lStorage.forEach(e => addToShoppingCart(e.item.title, e.item.price, e.item.image))
     }
 }
 
-function addLocalStorage() {
-    localStorage.setItem('carrito', JSON.stringify(carrito))
+function addLocalStorage() {    
+    localStorage.setItem('carrito', JSON.stringify(carrito))    
 }
 
 //------------------------------------------------------------------------------
 
-let counter = 1;
+
 
 function addBotonClick(e) {
     
     const button = e.target;
     const product = button.closest('.producto');
-    let keyTitle = 'title' + counter
-    let keyPrice = 'price' + counter
-    let keyImage = 'image' + counter
 
     const productTittle = product.querySelector('.nameProducto').textContent;
 
@@ -137,13 +130,7 @@ function addBotonClick(e) {
 
     const productImage = product.querySelector('.img-producto').src;
 
-    carrito = {
-        [keyTitle]: productTittle, [keyPrice]: productPrice, [keyImage]: productImage
-    }
-
-    console.log(carrito);
     addToShoppingCart(productTittle, productPrice, productImage);
-    counter++;
 }
 
 const buyButton = document.querySelector('.comprarButton');
@@ -154,6 +141,9 @@ const divCart = document.querySelector('.divCart');
 
 function addToShoppingCart(productTittle, productPrice, productImage) {
 
+    carrito.push({
+        item : {title : productTittle, price: productPrice, image: productImage}
+    })
 
     //funcion para no duplicar producto
     const notDuplicate = divCart.getElementsByClassName('shoppingCartItemTitle');
